@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:31:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/06 12:47:37 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/06 15:04:20 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@
 #  define BHU "0123456789ABCDEF"
 # endif
 # define ABS(Value) (Value > 0 ? Value : -Value)
-# if defined (__APPLE__)
-#  define NULL_STR_MSG "(nil)"
-# else
+# ifndef NULL_STR_MSG
 #  define NULL_STR_MSG "(null)"
 # endif
 # if defined (__APPLE__)
-#  define NULL_PTR_MSG "(null)"
+#  ifndef NULL_PTR_MSG
+#   define NULL_PTR_MSG "0x0"
+#  endif
 # else
-#  define NULL_PTR_MSG "(nil)"
+#  ifndef NULL_PTR_MSG
+#   define NULL_PTR_MSG "(nil)"
+#  endif
 # endif
 int	ft_printf(const char *s, ...);
 #endif
