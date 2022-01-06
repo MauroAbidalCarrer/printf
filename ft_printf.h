@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:31:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/06 15:04:20 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:13:01 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # ifndef BHU
 #  define BHU "0123456789ABCDEF"
 # endif
-# define ABS(Value) (Value > 0 ? Value : -Value)
 # ifndef NULL_STR_MSG
 #  define NULL_STR_MSG "(null)"
 # endif
@@ -38,5 +37,6 @@
 #   define NULL_PTR_MSG "(nil)"
 #  endif
 # endif
+
 int	ft_printf(const char *s, ...);
 #endif
