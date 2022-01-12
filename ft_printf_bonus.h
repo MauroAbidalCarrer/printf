@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:31:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/11 19:45:39 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:52:16 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,76 +52,25 @@
 # ifndef SPACES
 #  define SPACES "          "
 # endif 
+
 typedef unsigned long long	t_ul;
+//sign flag indices 0 = #, 1 = ' ' , 2 = +
+//precision flag
+//a csupdixX% i il faut faire une convertion, a 0 si c la fin.
+//format precision
+//flag precision
 typedef struct format
 {
-	char	sfi[3];//sign flag indices 0 = #, 1 = ' ' , 2 = +
-	char	pf;//precision flag
-	char	conv;//est egale a 'S' si il faut imprimer une partie de s, a csupdixX% i il faut faire une convertion, a 0 si c la fin.
-	unsigned short		fo_p;//format precision
-	unsigned short		fl_p;//flag precision
-	char	rev_fo_p;
+	char				sfi[3];
+	char				pf;
+	char				conv;
+	unsigned short		fo_p;
+	unsigned short		fl_p;
+	char				rev_fo_p;
 }	t_format;
 
-int		ft_printf(const char *s, ...);
+int			ft_printf(const char *s, ...);
 t_format	parse_format(char **str, t_format f);
-int		put_chars(char *src, int nb, int *ws);
-int		ft_cont(char c, char *s);
-//cspdiuxX%
-
-//LA CONVERSTION % NE PEUT ETRE PRECEDEE QUE PAR UN %
-
-//# = ajouter 0x, juste ecrire 0 si n = 0. Valable pour x,X.
-//  = ecrire ' ' si n >= 0. Valable pour p,i,d. 
-//+ = ecrire + si n >= 0. Valable pour p,i,d.
-
-//IL PEUT Y AVOIR AUTANT DE sf QUE POSSIBLE AU DEBUT DU FORMAT
-//IL NE PEUT PAS Y AVOIR DE sf APRES UNE PRECISION
-//SEUL LES sf VALABLES SONT PRIS EN COMPTE(ex:si il y % +d , + est pris en compte, %#  +X, # et pris em compte
-//LES ESPACES SONT IGNOREES Si il y un +-_-
-
-//- = mettre les espaces de la fo_p a droite si la str est trop petite(foncionne avec toute le conv)
-
-//0 = mettre des zero entre le sign et le nombre, si conv = 's' ou 'c' alors mettre des espaces. Valable pour u,d,i,x,X,P,c.
-//. = comme 0, sauf que si fl_p et nombre = 0, alors, jsute ecrire les signes.
-
-//SI AUCUNE PRECISION N'EST FOURNIE APRES UN pf, LA PRECISION EST DE 0
-//SI IL Y A UN . OU UN - ALORS LES 0 QUI SUIVENT SONT CONSIDERES COMME UN PRECISION ET NON DES pf
-//IL NE PEUT PAS Y AVOIR UN - APRES UNE PRECISION (puisque - fonctionne comme fo_p a lenvers)
-//	LA PREMIERE PRECISION PEUT COMMENCER PAR 0(nigga bruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuh)
-//	DONC SI IL N'Y A PAS UN AUTRE pf APRES UNE PRECISION QUI COMMENCE PAR 0, ALORS LE 0 EST UN pf
-//IL NE PEUT PAS Y AVOIR DE pf APRES UN .(mais la fl_p peut etre egale a 0)
-//IL NE PEUT PAS Y AVOIR DE pf APRES fl_p(mais la fl_p peut etre egale a 0)
-//LE FLAG 0(mais pas le .) EST IGNORE SI rev_fo_op == '-'
-//IL NE PEUT PAS Y AVOIR DE - APRES UNE PRECISION
-//UNE CONVERSION MARQUE TOUJOURS LA FIN D'UN FORMAT
-
-//COMBINAISONS VALIDES:
-//sf|fo_p|pf|fl_p|conv	(%#015.12d)
-//fo_p|pf|fl_p|conv	(%032.3x)
-//pf|fl_p|conv		(%015d)
-//pf|conv		(%0s)
-//fo_p|conv		(%900u)
-//conv			(%%)
-//pf|sf|conv		(%00-0-0-0 p)
-//pf|sf|fl_p|conv	(%----  +123p)
-//sf|pf|conv		(% +#.d)
-//pf|sf|conv		(%0+d)(ne foncitionne pas avec . comme pf)
-//sf|pf|sf|conv		(% -+d)
-//pf|sf|pf|conv		(%0 0X)
-//pf|sf|pf|fl_p|conv	(%-+-123s)
-//sf|pf|sf|fl_p|conv	(%+0#321u)
-
-//COMBINAISON INVALIDES:
-//#015-12d
-//..
-//00123+d
-//34-d
-//34%
-
-//ORDRE DE LECTURE:
-//PASSER DES FLAGS
-//PASSER UNE PRECISION
-//PASSER DES FLAGS
-//PASSER UNE PRECISION
+int			put_chars(char *src, int nb, int *ws);
+int			ft_cont(char c, char *s);
 #endif

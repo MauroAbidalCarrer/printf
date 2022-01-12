@@ -6,11 +6,9 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 11:26:57 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/12 14:13:40 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:47:59 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include<stdio.h>
-
 #include"ft_printf_bonus.h"
 
 int	put_chars(char *src, int nb, int *wc)
@@ -63,6 +61,8 @@ int	parse_precision(char *s, int i, t_format *f)
 		n *= 10;
 		n += s[i++] - '0';
 	}
+	if (f == NULL)
+		return (i);
 	if (f->pf == '.' || (f->pf == '0' && f->rev_fo_p != '-'))
 		f->fl_p = n;
 	else
@@ -72,8 +72,6 @@ int	parse_precision(char *s, int i, t_format *f)
 
 int	parse_flags(char *s, int i, t_format *f)
 {
-	int	j;
-
 	while (i != -1 && ft_cont(s[i], FLAGS))
 	{
 		f->sfi[0] = (f->sfi[0] || s[i] == '#');
@@ -85,14 +83,8 @@ int	parse_flags(char *s, int i, t_format *f)
 		{
 			if (f->pf == '.' || f->fl_p || (s[i] == '-' && f->fo_p))
 				return (-1);
-			if (s[i] == '0')
-			{
-				j = i + 1;
-				while (ft_cont(s[j], "0123456789"))
-					j++;
-				if (s[j] == '.')
-					return (i + 1);
-			}
+			if (s[i] == '0' && s[parse_precision(s, i + 1, NULL)] == '.')
+				return (i + 1);
 			if (s[i] != '-')
 				f->pf = s[i];
 			else
