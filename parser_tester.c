@@ -10,7 +10,10 @@ void	print_format(t_format f)
 int	test(char *format, int valid)
 {
 	char *save = format;
-	t_format f = parse_format(&format);
+	t_format f;
+	for (int i = 0; i < sizeof(f); i++)
+		((unsigned char *)&f)[i] = 0;
+	f = parse_format(&format, f);
 	if ((f.conv != 0) != valid)
 	{
 		printf("testing \"%s\"\n", save);
@@ -25,7 +28,7 @@ int	test(char *format, int valid)
 	}
 	return (valid != (f.conv != 0));
 }
-
+/*
 int	main()
 {
 	char *invalid_formats[]	=
@@ -63,3 +66,4 @@ int	main()
 		errors += test(valid_formats[i], 1);
 	printf("%d errors encounterd.\n", errors);
 }
+*/

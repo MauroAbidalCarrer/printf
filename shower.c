@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 	putnbr(print("32 in hexa lower case = %x\n", 32));
 	putnbr(print("32 in hexa upper case = %X\n", 32));
 	putnbr(print("0 in HDL = %X\n", 32));
-	putnbr(print("adress 123 = %p\n", "123"));
+	putnbr(print("adress 123 = %p\n", 123));
 	putnbr(print("negative number = %d\n", -123));
 	putnbr(print("negative number = %i\n", -123));
 	putnbr(print("%p\n", NULL));
@@ -73,19 +73,25 @@ int	main(int ac, char **av)
 	putnbr(print("%0s\n", "salut ca va?"));
 	putnbr(print("%90u\n", 42));
 	putnbr(print("%%\n"));
-	putnbr(print("%%00-0-0-0  p = \"%00-0-0-0  p\"\n", "bonjour"));
+	putnbr(print("%%00-0-0-0  p (32100) = \"%00-0-0-0  p\"\n", 32100));
 	putnbr(print("%00-0-0-0  p\n", NULL));
-	putnbr(print("%----  +23p\n", "bonjour"));
-	putnbr(print("% +#.d\n", 0));
+	putnbr(print("%%----  +23p (3524) = %----  +23p\n", 3524));
+	putnbr(print("%% +.d = \"% +#.d\"\n", 0));
 	putnbr(print("%0+d\n", 120));
 	putnbr(print("% -+d\n", 120));
 	putnbr(print("% -+d\n", -120));
 	putnbr(print("%0 0X\n", 120));
 	putnbr(print("%0 0X\n", 0));
 	putnbr(print("%-+-23s\n", "mewicclair"));
+	putnbr(print("%023s\n", "mewicclair"));
 	putnbr(print("%-+-23s\n", NULL));
 	putnbr(print("%%+0#32u = %+0#32u\n", 0));
+	putnbr(print("%%+032d = %+032d\n", 92));
+	putnbr(print("%%+032s = %+032s\n", "sale"));
 	putnbr(print("%%+0#32u = %+0#32u\n", 100));
+	putnbr(print("%%-+012d = %-+012d\n", 22));
+	putnbr(print("%%-+.12d = %-+.12d\n", 22));
+	putnbr(print("%%-+015.12d = %-+015.12d\n", 22));
 	putnbr(print("\n"));
 //multiple fomats
 	putnbr(print("multiple formats:\n"));

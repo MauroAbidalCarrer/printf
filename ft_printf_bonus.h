@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:31:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/10 21:14:13 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:45:39 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@
 # ifndef SF
 #  define SF "# +"
 # endif 
+# ifndef ZEROS
+#  define ZEROS "0000000000"
+# endif 
+# ifndef SPACES
+#  define SPACES "          "
+# endif 
 typedef unsigned long long	t_ul;
 typedef struct format
 {
@@ -57,10 +63,9 @@ typedef struct format
 	char	rev_fo_p;
 }	t_format;
 
-t_format	new_f();
 int		ft_printf(const char *s, ...);
-t_format	parse_format(char **str);
-int		put_chars(char c, int nb, int *ws);
+t_format	parse_format(char **str, t_format f);
+int		put_chars(char *src, int nb, int *ws);
 int		ft_cont(char c, char *s);
 //cspdiuxX%
 
@@ -76,16 +81,19 @@ int		ft_cont(char c, char *s);
 //LES ESPACES SONT IGNOREES Si il y un +-_-
 
 //- = mettre les espaces de la fo_p a droite si la str est trop petite(foncionne avec toute le conv)
-//0 = mettre des zero a gauche si conv = 's' ou 'c' alors on met des espaces. Valable pour u,d,i,x,X,P.
-//. = comme 0, sauf que si precision et nombre = 0, alors, rien ecrire.
+
+//0 = mettre des zero entre le sign et le nombre, si conv = 's' ou 'c' alors mettre des espaces. Valable pour u,d,i,x,X,P,c.
+//. = comme 0, sauf que si fl_p et nombre = 0, alors, jsute ecrire les signes.
 
 //SI AUCUNE PRECISION N'EST FOURNIE APRES UN pf, LA PRECISION EST DE 0
-//SI IL Y A UN . ALORS LES 0 QUI SUIVENT SONT CONSIDERES COMME UN PRECISION ET NON DES pf
+//SI IL Y A UN . OU UN - ALORS LES 0 QUI SUIVENT SONT CONSIDERES COMME UN PRECISION ET NON DES pf
 //IL NE PEUT PAS Y AVOIR UN - APRES UNE PRECISION (puisque - fonctionne comme fo_p a lenvers)
 //	LA PREMIERE PRECISION PEUT COMMENCER PAR 0(nigga bruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuh)
 //	DONC SI IL N'Y A PAS UN AUTRE pf APRES UNE PRECISION QUI COMMENCE PAR 0, ALORS LE 0 EST UN pf
 //IL NE PEUT PAS Y AVOIR DE pf APRES UN .(mais la fl_p peut etre egale a 0)
 //IL NE PEUT PAS Y AVOIR DE pf APRES fl_p(mais la fl_p peut etre egale a 0)
+//LE FLAG 0(mais pas le .) EST IGNORE SI rev_fo_op == '-'
+//IL NE PEUT PAS Y AVOIR DE - APRES UNE PRECISION
 //UNE CONVERSION MARQUE TOUJOURS LA FIN D'UN FORMAT
 
 //COMBINAISONS VALIDES:
