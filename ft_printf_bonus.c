@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:56:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/12 14:12:00 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/12 15:45:06 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	put_str(char *src, t_format f, int *wc, int off)
 		return (put_str(NULL_STR_MSG, f, wc, 0));
 	len = ft_cont(0, src);
 	fo_len = f.fo_p - (len + (f.fl_p - len) * (f.fl_p > len));
-	fo_len = -off * (f.pf == '.');
+	fo_len -= off * (f.pf == '.');
 	zero_flag_src = ZEROS;
 	zero_len = f.fl_p - len + off * (f.pf == '.');
 	if (ft_cont(f.conv, "cs"))
