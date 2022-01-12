@@ -1,5 +1,5 @@
-#include"ft_printf_bonus.h"
 #include<stdio.h>
+#include<unistd.h>
 
 static void	putdigit(long n)
 {
@@ -25,6 +25,7 @@ void	printf_putnbr(int n)
 {
 	printf("%d\n", n);
 }
+int	ft_printf(const char *s, ...);
 
 int	main(int ac, char **av)
 {
@@ -70,6 +71,7 @@ int	main(int ac, char **av)
 	putnbr(print("%#015.0000d\n",  42));
 	putnbr(print("%032.3x\n",  42));
 	putnbr(print("%032.3x\n",  42));
+	putnbr(print("%#x\n",  42));
 	putnbr(print("%0s\n", "salut ca va?"));
 	putnbr(print("%90u\n", 42));
 	putnbr(print("%%\n"));
