@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:56:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/12 17:49:59 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:13:04 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	put_str(char *src, t_format f, int *wc, int off)
 	if (f.conv == 's' && f.pf == '.' && f.fl_p < len)
 		len = f.fl_p;
 	fo_len = f.fo_p - (len + (f.fl_p - len) * (f.fl_p > len));
-	fo_len -= off * (f.pf == '.');
+printf("fo_len before = %d\n", fo_len);
+	//fo_len -= off * (f.pf == '.');
+printf("fo_len after = %d\n", fo_len);
+printf("f.fo_p after = %d\n", f.fo_p);
 	zero_flag_src = ZEROS;
 	zero_len = f.fl_p - len + off * (f.pf == '.');
 	if (ft_cont(f.conv, "cs"))
