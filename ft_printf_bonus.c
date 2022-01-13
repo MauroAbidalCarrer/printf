@@ -6,11 +6,11 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:56:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/12 19:13:04 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:10:42 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
+#include <stdio.h>
 #include "ft_printf_bonus.h"
 
 int	put_str(char *src, t_format f, int *wc, int off)
@@ -20,23 +20,21 @@ int	put_str(char *src, t_format f, int *wc, int off)
 	char	*zero_flag_src;
 	int		zero_len;
 
-	if (src == NULL)
+	if (!src)
 		return (put_str(NULL_STR_MSG, f, wc, 0));
-	len = ft_cont(0, src);
+	len = ft_cont(*src * (f.conv == 'c'), src);
+	len += (*src == 0 && f.conv == 'c');
 	if (f.conv == 's' && f.pf == '.' && f.fl_p < len)
-		len = f.fl_p;
-	fo_len = f.fo_p - (len + (f.fl_p - len) * (f.fl_p > len));
-printf("fo_len before = %d\n", fo_len);
-	//fo_len -= off * (f.pf == '.');
-printf("fo_len after = %d\n", fo_len);
-printf("f.fo_p after = %d\n", f.fo_p);
+		len =  f.fl_p;
+	zero_len = (f.fl_p - len + off * (f.pf == '.'));
+	zero_len *= !(f.conv == 's' && f.pf == '.') * (zero_len > 0);
+	fo_len = f.fo_p - len - zero_len;
 	zero_flag_src = ZEROS;
-	zero_len = f.fl_p - len + off * (f.pf == '.');
 	if (ft_cont(f.conv, "cs"))
 		zero_flag_src = SPACES;
 	if ((!f.rev_fo_p && put_chars(SPACES, fo_len, wc))
 		|| put_chars(src, off, wc)
-		|| ((ft_cont(f.pf, "0."))
+		|| ((ft_cont(f.pf, "0.")) && !(f.conv == 'c' && f.pf == '.')
 			&& put_chars(zero_flag_src, zero_len, wc))
 		|| put_chars(src + off, len - off, wc)
 		|| (f.rev_fo_p && put_chars(SPACES, fo_len, wc)))

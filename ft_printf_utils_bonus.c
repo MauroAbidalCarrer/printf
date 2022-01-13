@@ -6,7 +6,7 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 11:26:57 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/12 16:39:10 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:05:51 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include"ft_printf_bonus.h"
@@ -17,7 +17,9 @@ int	put_chars(char *src, int nb, int *wc)
 	int	len;
 	int	count;
 
-	len = ft_cont(0, src);
+	len = 1;
+	if (nb > 1)
+		len = ft_cont(0, src);
 	while (nb > 0)
 	{
 		count = len * (len <= nb) + nb * (nb < len);

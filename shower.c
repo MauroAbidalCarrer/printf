@@ -94,6 +94,7 @@ int	main(int ac, char **av)
 	putnbr(print("%%-+012d = %-+012d\n", 22));
 	putnbr(print("%%-+.12d = %-+.12d\n", 22));
 	putnbr(print("%%-+015.12d = %-+015.12d\n", 22));
+	putnbr(print("%%-15.2d = %%-15.2d\n", -10));
 	putnbr(print("\n"));
 //multiple fomats
 	putnbr(print("multiple formats:\n"));
