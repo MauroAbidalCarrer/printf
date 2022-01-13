@@ -6,11 +6,10 @@
 /*   By: maabidal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 11:56:48 by maabidal          #+#    #+#             */
-/*   Updated: 2022/01/13 20:10:42 by maabidal         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:56:35 by maabidal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_printf_bonus.h"
 
 int	put_str(char *src, t_format f, int *wc, int off)
@@ -25,7 +24,7 @@ int	put_str(char *src, t_format f, int *wc, int off)
 	len = ft_cont(*src * (f.conv == 'c'), src);
 	len += (*src == 0 && f.conv == 'c');
 	if (f.conv == 's' && f.pf == '.' && f.fl_p < len)
-		len =  f.fl_p;
+		len = f.fl_p;
 	zero_len = (f.fl_p - len + off * (f.pf == '.'));
 	zero_len *= !(f.conv == 's' && f.pf == '.') * (zero_len > 0);
 	fo_len = f.fo_p - len - zero_len;
